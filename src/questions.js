@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const managerQuestions = [
     {
         type: 'input',
-        name: 'name',
+        name: 'managerName',
         message: "What is the team manager's name?"
     },
     {
@@ -28,9 +28,7 @@ const teamQuestions = [
         type: 'list',
         name: 'addEmployees',
         message: 'Would you like to add an engineer, intern, or finish building your team?',
-        choices: ['Add Engineer', 'Add Intern', "I'm done building my team"],
-        default: "Add Engineer"
-
+        choices: ['Add Engineer', 'Add Intern', "I'm done building my team"]
     },
     {
         type: 'input',
@@ -98,14 +96,13 @@ const promptEmployeeData = teamData => {
         .then(employeeData => {
             // if done adding employees to team, step out of prompts
             if (employeeData.addEmployees === "I'm done building my team") {
-                return;
+                return teamData;
             }
 
             // add employee data to answers and add more employees
             teamData.employees.push(employeeData);
-            console.log(teamData);
-            promptEmployeeData(teamData);
+            return promptEmployeeData(teamData);
         })
 };
 
-module.exports = { managerQuestions, teamQuestions, promptEmployeeData }
+module.exports = { managerQuestions, promptEmployeeData }
