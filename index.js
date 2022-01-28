@@ -10,7 +10,7 @@ const init = (leadQuestions) => {
 `);
 
 inquirer.prompt(leadQuestions)
-    // .then(promptEmployeeData)
+    .then(promptEmployeeData)
     .then(teamData => console.log(JSON.stringify(teamData)));
 };
 

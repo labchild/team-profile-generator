@@ -20,97 +20,92 @@ const managerQuestions = [
         type: 'number',
         name: 'office',
         message: "What is the manager's office number?"
-    },
+    }
+];
+
+const teamQuestions = [
     {
         type: 'list',
         name: 'addEmployees',
         message: 'Would you like to add an engineer, intern, or finish building your team?',
         choices: ['Add Engineer', 'Add Intern', "I'm done building my team"],
         default: "Add Engineer"
+
+    },
+    {
+        type: 'input',
+        name: 'name',
+        message: "What is the employee's name?",
+        when: ({ addEmployees }) => {
+            if (addEmployees === "I'm done building my team") {
+                return false;
+            }
+            return true;
+        }
+    },
+    {
+        type: 'number',
+        name: 'id',
+        message: "What is the employee's employee id?",
+        when: ({ addEmployees }) => {
+            if (addEmployees === "I'm done building my team") {
+                return false;
+            }
+            return true;
+        }
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: "What is the employee's email address?",
+        when: ({ addEmployees }) => {
+            if (addEmployees === "I'm done building my team") {
+                return false;
+            }
+            return true;
+        }
+    },
+    {
+        type: 'input',
+        name: 'github',
+        message: "What is the engineer's GitHub username?",
+        when: ({ addEmployees }) => {
+            if (addEmployees === "Add Engineer") {
+                return true;
+            }
+            return false;
+        }
+    },
+    {
+        type: 'input',
+        name: 'school',
+        message: "Where does the intern go to school?",
+        when: ({ addEmployees }) => {
+            if (addEmployees === "Add Intern") {
+                return true;
+            }
+            return false;
+        }
     }
 ];
-/*
-const promptEmployeeData = teamData => {
-    // if finished building team
-    if (teamData.addEmployees === "I'm done building my team") {
-        return;
-    }
 
-    // initialize array to hold team in answer hash
+const promptEmployeeData = teamData => {
     if (!teamData.employees) {
         teamData.employees = [];
     }
 
-    // if adding engineer
-    if (teamData.addEmployees === 'Add Engineer')
-        return inquirer.prompt([
-            {
-                type: 'input',
-                name: 'name',
-                message: "What is the engineer's name?"
-            },
-            {
-                type: 'number',
-                name: 'id',
-                message: "What is the engineer's employee id?"
-            },
-            {
-                type: 'input',
-                name: 'email',
-                message: "What is the engineer's email address?"
-            },
-            {
-                type: 'input',
-                name: 'github',
-                message: "What is the engineer's GitHub username?"
-            },
-            {
-                type: 'list',
-                name: 'confirmAddEmployee',
-                message: 'Would you like to add another employye to the team?',
-                choices: ['Add Engineer', 'Add Intern', "I'm done building my team"],
-                default: "I'm done building my team"
+    return inquirer.prompt(teamQuestions)
+        .then(employeeData => {
+            // if done adding employees to team, step out of prompts
+            if (employeeData.addEmployees === "I'm done building my team") {
+                return;
             }
-        ]).then(engineerData => {
-            teamData.employees.push(engineerData);
-            return promptEmployeeData(teamData);
-        });
 
-    // if adding intern
-    if (teamData)
-    return inquirer.prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: "What is the intern's name?"
-        },
-        {
-            type: 'number',
-            name: 'id',
-            message: "What is the intern's employee id?"
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: "What is the intern's email address?"
-        },
-        {
-            type: 'input',
-            name: 'school',
-            message: "Where does the intern go to school?"
-        },
-        {
-            type: 'list',
-            name: 'confirmAddEmployee',
-            message: 'Would you like to add another employee to the team?',
-            choices: ['Add Engineer', 'Add Intern', "I'm done building my team"],
-            default: "I'm done building my team"
-        }
-    ]).then(internData => {
-        teamData.employees.push(internData);
-        return promptEmployeeData(teamData)
-    });
-}
-*/
+            // add employee data to answers and add more employees
+            teamData.employees.push(employeeData);
+            console.log(teamData);
+            promptEmployeeData(teamData);
+        })
+};
 
-module.exports = { managerQuestions, promptEmployeeData }
+module.exports = { managerQuestions, teamQuestions, promptEmployeeData }
