@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const { managerQuestions, promptEmployeeData } = require('./src/questions');
-const Employee = require('./lib/Employee');
+const Manager = require('./lib/Manager');
 
 // function to call app
 const init = (leadQuestions) => {
@@ -14,9 +14,9 @@ const init = (leadQuestions) => {
         .then(promptEmployeeData)
         .then(answers => {
             console.log('made it!')
-            const employee = new Employee(answers.name, answers.id, answers.email);
+            const manager = new Manager(answers.managerName, answers.id, answers.email, answers.office);
 
-            console.log(JSON.stringify(employee));
+            console.log(JSON.stringify(manager));
         });
 };
 
