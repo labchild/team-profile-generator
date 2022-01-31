@@ -4,20 +4,44 @@ const managerQuestions = [
     {
         type: 'input',
         name: 'managerName',
-        message: "What is the team manager's name?"
+        message: "What is the team manager's name? (Required)",
+        validate: nameInput => {
+            if (nameInput) {
+                return true;
+            } else {
+                console.log("Enter the employee's name.");
+                return false;
+            }
+        }
     },
     {
-        type: 'number',
+        type: 'input',
         name: 'id',
-        message: "What is the manager's employee id?"
+        message: "What is the manager's employee id? (Required)",
+        validate: idInput => {
+            if (!idInput || isNaN(idInput)) {
+                console.log('Employee id must be a number.')
+                return false;
+            } else {
+                return true;
+            }
+        }
     },
     {
         type: 'input',
         name: 'email',
-        message: "What is the manager's email address?"
+        message: "What is the manager's email address? (Required)",
+        validate: emailInput => {
+            if (emailInput && emailInput.includes('@')) {
+                return true;
+            } else {
+                console.log("Please enter a valid email address");
+                return false;
+            }
+        }
     },
     {
-        type: 'number',
+        type: 'input',
         name: 'office',
         message: "What is the manager's office number?"
     }
@@ -33,16 +57,24 @@ const teamQuestions = [
     {
         type: 'input',
         name: 'name',
-        message: "What is the employee's name?",
+        message: "What is the employee's name? (Required)",
         when: ({ addEmployees }) => {
             if (addEmployees === "I'm done building my team") {
                 return false;
             }
             return true;
+        },
+        validate: nameInput => {
+            if (nameInput) {
+                return true;
+            } else {
+                console.log("Enter the employee's name.");
+                return false;
+            }
         }
     },
     {
-        type: 'number',
+        type: 'input',
         name: 'id',
         message: "What is the employee's employee id?",
         when: ({ addEmployees }) => {
@@ -50,6 +82,14 @@ const teamQuestions = [
                 return false;
             }
             return true;
+        },
+        validate: idInput => {
+            if (!idInput || isNaN(idInput)) {
+                console.log('Employee id must be a number.');
+                return false;
+            } else {
+                return true;
+            }
         }
     },
     {
@@ -61,6 +101,14 @@ const teamQuestions = [
                 return false;
             }
             return true;
+        },
+        validate: emailInput => {
+            if (emailInput && emailInput.includes('@')) {
+                return true;
+            } else {
+                console.log("Enter the employee's email address.");
+                return false;
+            }
         }
     },
     {
