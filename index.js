@@ -1,8 +1,11 @@
 const inquirer = require('inquirer');
+
 const { managerQuestions, promptEmployeeData } = require('./src/questions');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+const generateHTML = require('./src/page-template');
+const { writeFile, copyFile } = require('./src/generate-page');
 
 // function to call app
 const init = (leadQuestions) => {
@@ -33,11 +36,24 @@ const init = (leadQuestions) => {
 
                         team.push(intern);
                     }
-
-                    return team;
-                })
-            }
-        });
+                });
+            };
+            return team;
+        })
+        .then(team => {
+            return generateHTML(team);
+        })
+        .then(pageHTML => {
+            return writeFile(pageHTML);
+        })
+        .then(writeFileResponse => {
+            console.log(writeFileResponse);
+            return copyFile();
+        })
+        .then(copyFileResponse => {
+            console.log(copyFileResponse);
+        })
+        .catch(err => console.log(err));
 };
 
 init(managerQuestions);

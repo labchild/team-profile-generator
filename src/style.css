@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: 2vh 0;
+    background: #5bc0de;
+    color: #fff;
+}
+
+.card {
+    box-shadow: 5px 5px 5px 3px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    color: #fff;
+}

@@ -1,77 +1,83 @@
 // render employee cards data arr
-const renderTeamCards = teamArr => {
-    // return card row
-    // filter arr to get manager, return card
+const renderManagerCard = manager => {
+    console.log(manager);
+    // get manager, return card
     // filter arr to get engineers, return cards joined
     // filter arr to get interns, return cards joined
     return `
-<div class="row">
-${teamArr.filter(manager => {
-        if (manager.getRole() === 'Manager') {
-            return `
-        <div class="card">
-        <div class="card-header">
-            <h3>${employee.getName()}</h3>
-            <p><i class="fa-solid fa-mug-hot> ${employee.getRole()}</p>
+        <div class="col-md-4 mt-2">
+            <div class="card">
+                <div class="card-header bg-danger">
+                    <h3>${manager.getName()}</h3>
+                    <p><i class="fa-solid fa-mug-hot"></i> ${manager.getRole()}</p>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">ID: ${manager.id}</li>
+                        <li class="list-group-item">Email: <a href="mailto:${manager.email}" target="_blank">${manager.email}</a></li>
+                        <li class="list-group-item">Office: ${manager.office}</li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <ul class="list-group">
-                <li class="list-group-item">ID: ${employee.id}</li>
-                <li class="list-group-item">Email: ${employee.email}</li>
-                <li class="list-group-item">Office: ${employee.office}</li>
-            </ul>
-        </div>
-        `;
-        }
-    })
-        }
-${teamArr.filter(employee => {
-            if (employee.getRole() === 'Engineer') {
+    `;
+};
+
+const renderEmployeeCards = employees => {
+    console.log(employees);
+
+    return `
+    ${employees.filter(employee => employee.getRole() === 'Engineer')
+            .map(engineer => {
                 return `
-        <div class="card">
-        <div class="card-header">
-            <h3>${employee.getName()}</h3>
-            <p><i class="fa-solid fa-glasses> ${employee.getRole()}</p>
-        </div>
-        <div class="card-body">
-            <ul class="list-group">
-                <li class="list-group-item">ID: ${employee.id}</li>
-                <li class="list-group-item">Email: ${employee.email}</li>
-                <li class="list-group-item">Office: ${employee.github}</li>
-            </ul>
-        </div>
-        `;
-            }
-        }).join('')}
-${teamArr.filter(employee => {
-            if (employee.getRole() === 'Engineer') {
+            <div class="col-md-4 mt-2">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <h3>${engineer.getName()}</h3>
+                        <p><span class="fa-solid fa-glasses"></span> ${engineer.getRole()}</p>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">ID: ${engineer.id}</li>
+                            <li class="list-group-item">Email: <a href="mailto:${engineer.email}" target="_blank">${engineer.email}</a></li>
+                            <li class="list-group-item">Github: <a href="https://github.com/${engineer.github}" target="_blank">${engineer.github}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            `
+            }).join('')}
+    ${employees.filter(employee => employee.getRole() === 'Intern')
+            .map(intern => {
                 return `
-        <div class="card">
-        <div class="card-header">
-            <h3>${employee.getName()}</h3>
-            <p><i class="fa-solid fa-gradutation-cap> ${employee.getRole()}</p>
-        </div>
-        <div class="card-body">
-            <ul class="list-group">
-                <li class="list-group-item">ID: ${employee.id}</li>
-                <li class="list-group-item">Email: ${employee.email}</li>
-                <li class="list-group-item">Office: ${employee.school}</li>
-            </ul>
-        </div>
-        `;
-            }
-        }).join('')}
-`;
+            <div class="col-md-4 mt-2">
+                <div class="card">
+                    <div class="card-header bg-info">
+                        <h3>${intern.getName()}</h3>
+                        <p><span class="fa-solid fa-graduation-cap"></span> ${intern.getRole()}</p>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item">ID: ${intern.id}</li>
+                            <li class="list-group-item">Email: <a href="mailto:${intern.email}" target="_blank">${intern.email}</a></li>
+                            <li class="list-group-item">School: ${intern.school}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            `
+            }).join('')}`
 };
 
 // render date
 const renderDate = () => {
     const date = new Date();
-    return `${date.getMonth()} ${date.getDate()}, ${date.getFullYear()}`;
+    return `${date}`;
 }
 
 // function to render page template
 const generateHTML = data => {
+    const [manager, ...employees] = data;
 
     return `
 <!DOCTYPE html>
@@ -92,16 +98,18 @@ const generateHTML = data => {
 
 <body>
     <header>
-        <h1>My Team</h1>
+        <h1 class="text-center mx-auto">My Team</h1>
     </header>
 
-    <main class="container">
-        ${renderTeamCards(data)}
+    <main class="container w-100">
+        <div class="row">
+        ${renderManagerCard(manager)}${renderEmployeeCards(employees)}
+        </div>
     </main>
 
-    <footer class="bg-secondary bg-gradient bg-opacity-50">
-        <div class="text-center text-light">
-            updated on ${renderDate()}
+    <footer class="w-100 py-4">
+        <div class="text-center">
+            updated ${renderDate()}
         </div>
     </footer>
 </body>
