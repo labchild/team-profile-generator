@@ -1,3 +1,4 @@
+// render employee cards data arr
 const renderTeamCards = teamArr => {
     // return card row
     // filter arr to get manager, return card
@@ -63,10 +64,13 @@ ${teamArr.filter(employee => {
 `;
 };
 
+// render date
 const renderDate = () => {
     const date = new Date();
     return `${date.getMonth()} ${date.getDate()}, ${date.getFullYear()}`;
 }
+
+// function to render page template
 const generateHTML = data => {
 
     return `
@@ -92,7 +96,7 @@ const generateHTML = data => {
     </header>
 
     <main class="container">
-        ${renderEmployeeCards(data)}
+        ${renderTeamCards(data)}
     </main>
 
     <footer class="bg-secondary bg-gradient bg-opacity-50">
