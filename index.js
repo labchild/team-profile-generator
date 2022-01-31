@@ -15,24 +15,26 @@ const init = (leadQuestions) => {
     return inquirer.prompt(leadQuestions)
         .then(promptEmployeeData)
         .then(answers => {
-            console.log('made it!')
-            const manager = new Manager(answers.managerName, answers.id, answers.email, answers.office);
+            const team = [];
 
-            console.log(JSON.stringify(manager));
+            const manager = new Manager(answers.managerName, answers.id, answers.email, answers.office);
+            team.push(manager);
 
             if (answers.employees) {
                 answers.employees.forEach(employee => {
                     if (employee.github) {
                         const engineer = new Engineer(employee.name, employee.id, employee.email, employee.github);
 
-                        console.log(JSON.stringify(engineer));
+                        team.push(engineer);
                     }
 
                     if (employee.school) {
                         const intern = new Intern(employee.name, employee.id, employee.email, employee.school);
 
-                        console.log(JSON.stringify(intern));
+                        team.push(intern);
                     }
+
+                    return team;
                 })
             }
         });
