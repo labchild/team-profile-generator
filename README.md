@@ -20,7 +20,7 @@ The user is prompted to enter information for a manager, then for each employee 
 * [Inquirer.js](https://www.npmjs.com/package/inquirer)
 * [Jest](https://www.npmjs.com/package/jest)
 * [Bootstrap](https://getbootstrap.com/)
-* Built in [Node.js](https://nodejs.org/en/) JavaScript runtime environment
+* Built in [Node.js](https://nodejs.org/en/) environment
 
 ## Installation
 This appliction runs in Node.js.
@@ -32,26 +32,29 @@ npm i
 Team Profile generator is now installed and ready to execute!
 
 ## Usage
-Watch a [video tutorial]() for step-by-step usage instructions, or follow this guide:
+Watch a [video tutorial](https://drive.google.com/file/d/1x1Flt2RBrHrNXwv8EFMg-1K7TZjteHQt/view?usp=sharing) for step-by-step usage instructions, or follow this guide:
 
 To use Team Profile Generator, navigate to the project root directory from your CLI. Run the command ``` node index.js ``` or ``` npm start ```.
-![step 1](step-1.png)
+![step 1](/src/images/step-1.png)
 
-Answer the prompts as they appear by entering your response directly into the command line.
-![step 2](step-2.png)
+Answer the prompts as they appear by entering your response directly into the command line. After you enter relvant information for an employee, you will be prompted to add another employee or finsh building your team. 
+![step 2](/src/images/step-2.png) ![step 2-a](/src/images/step-2-a.png)
 
 When you finish answering the prompts, you will be notified that your HTML file is ready.
-![step 3](step-3.png)
+![step 3](/src/images/step-3.png)
 
 Navigate to ```/dist``` to find your HTML file and a stylesheet. Use your new webpage however you choose, but remember to bring the stylesheet with!
-![step 4](step-4.png)
+![step 4](/src/images/step-4.png)
 
-You can quit the program at any time by pressing Ctrl + C (^C).
+Your page will look similar to the sample page included with the project, as seen below:
+![preview finished product](/src/images/preview.png)
+
+You can quit the program at any time by pressing Ctrl + C (^C on macOS).
 
 ## Tests
 This project includes unit tests on classes using the [Jest](https://www.npmjs.com/package/jest) library. If you wish to alter the models used to create employees, the tests suites can help indicate that the program will still execute successfully.
 
-Check out this [video]() demonstrating each test suite passing.
+Check out this [video](https://drive.google.com/file/d/1XMXgVJPSDpHP7B-JrHnrIv1wcl6rx3XW/view?usp=sharing) demonstrating each test suite passing.
 
 ## Questions & Contact
 Written and deployed by Lelah Bates Childs.
