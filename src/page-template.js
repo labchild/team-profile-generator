@@ -1,9 +1,5 @@
-// render employee cards data arr
+// render manager card
 const renderManagerCard = manager => {
-    console.log(manager);
-    // get manager, return card
-    // filter arr to get engineers, return cards joined
-    // filter arr to get interns, return cards joined
     return `
         <div class="col-md-4 mt-2">
             <div class="card">
@@ -23,9 +19,10 @@ const renderManagerCard = manager => {
     `;
 };
 
+// render employee cards
 const renderEmployeeCards = employees => {
-    console.log(employees);
-
+    // filter employees arr to find engineers, return cards
+    // filter employees arr to find interns return cards
     return `
     ${employees.filter(employee => employee.getRole() === 'Engineer')
             .map(engineer => {
@@ -69,7 +66,7 @@ const renderEmployeeCards = employees => {
             }).join('')}`
 };
 
-// render date
+// render date for footer
 const renderDate = () => {
     const date = new Date();
     return `${date}`;
